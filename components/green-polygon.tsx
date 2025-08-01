@@ -2,7 +2,6 @@
 
 import React, { useRef, useCallback } from "react"
 import * as THREE from "three"
-import { useLoader } from "@react-three/fiber"
 import { SvgShaderMaterialComponent } from "./svg-shader-material"
 
 
