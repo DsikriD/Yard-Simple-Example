@@ -78,5 +78,5 @@ export function SvgShaderMaterialComponent() {
   texture.magFilter = THREE.LinearFilter
   texture.generateMipmaps = false
   
-  return <svgShaderMaterial treeTexture={texture} />
+  return <primitive object={new SvgShaderMaterial({ treeTexture: texture })} />
 } 
