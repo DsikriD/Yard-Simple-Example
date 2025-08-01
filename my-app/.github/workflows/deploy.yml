@@ -26,16 +26,35 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f yarn.lock ]; then
+            yarn install --frozen-lockfile
+          elif [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
       
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          if [ -f yarn.lock ]; then
+            yarn build
+          elif [ -f package-lock.json ]; then
+            npm run build
+          elif [ -f pnpm-lock.yaml ]; then
+            pnpm run build
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
