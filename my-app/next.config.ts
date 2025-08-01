@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/Yard-Simple-Example' : '',
 };
 
 export default nextConfig;
