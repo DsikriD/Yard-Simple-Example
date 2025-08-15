@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useRef, useState, useCallback } from "react"
-import { Canvas, useThree, useLoader } from "@react-three/fiber"
+import { Canvas, useThree, useLoader, ThreeEvent } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import * as THREE from "three"
-import { InnerStrip } from "./components/inner-strip" // Импортируем новый компонент
-import { OuterStrip } from "./components/outer-strip" // Импортируем компонент внешней полосы
-import { GreenPolygon } from "./components/green-polygon" // Импортируем компонент зеленого полигона
+import { InnerStrip } from "@/entities/inner-strip" // Импортируем новый компонент
+import { OuterStrip } from "@/entities/outer-strip" // Импортируем компонент внешней полосы
+import { GreenPolygon } from "@/entities/green-polygon" // Импортируем компонент зеленого полигона
 
 // SVG для знака плюс с черной обводкой, закодированный в Data URL
 const PLUS_SVG_DATA_URL =
@@ -37,7 +37,7 @@ function DraggablePoint({
   const [isDragging, setIsDragging] = useState(false)
 
   const handlePointerDown = useCallback(
-    (event: any) => {
+    (event: ThreeEvent<PointerEvent>) => {
       event.stopPropagation()
       setIsDragging(true)
       onDragStart()
@@ -53,7 +53,7 @@ function DraggablePoint({
   }, [gl, onDragEnd])
 
   const handlePointerMove = useCallback(
-    (event: any) => {
+    (event: ThreeEvent<PointerEvent>) => {
       if (!isDragging) return
 
       event.stopPropagation()
@@ -111,8 +111,8 @@ function SideToggle({
   onToggle: (sideIndex: number) => void
   sideIndex: number
 }) {
-  const handleClick = useCallback(
-    (event: any) => {
+    const handleClick = useCallback(
+      (event: ThreeEvent<MouseEvent>) => {
       event.stopPropagation() // Останавливаем распространение, чтобы не сработал клик по линии
       onToggle(sideIndex)
     },
@@ -147,8 +147,8 @@ function AddPointIndicator({
 }) {
   const texture = useLoader(THREE.TextureLoader, PLUS_SVG_DATA_URL)
 
-  const handleClick = useCallback(
-    (event: any) => {
+    const handleClick = useCallback(
+      (event: ThreeEvent<MouseEvent>) => {
       event.stopPropagation() // Останавливаем распространение
       onAddPoint(segmentIndex, [event.point.x, event.point.y, 0])
     },

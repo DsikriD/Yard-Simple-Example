@@ -1,0 +1,1 @@
+export { InnerStrip } from './ui'
