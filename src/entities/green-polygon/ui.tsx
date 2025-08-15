@@ -2,7 +2,7 @@
 
 import React, { useRef, useCallback } from "react"
 import * as THREE from "three"
-import { SvgShaderMaterialComponent } from "./svg-shader-material"
+import { SvgShaderMaterialComponent } from "@/shared/ui/svg-shader-material"
 
 
 

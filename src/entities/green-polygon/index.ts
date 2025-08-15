@@ -1,0 +1,1 @@
+export { GreenPolygon } from './ui'

@@ -1,0 +1,1 @@
+export { OuterStrip } from './ui'
